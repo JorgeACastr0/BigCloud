@@ -1,0 +1,50 @@
+services:
+  api:
+    build: ./backend
+    container_name: bigdata-api
+    volumes:
+      - ./backend:/app
+    environment:
+      - PORT=3006
+      - VULTR_API_KEY=${VULTR_API_KEY}
+      - WOMPI_INTEGRITY_SECRET=${WOMPI_INTEGRITY_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES=${JWT_EXPIRES}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - NODE_ENV=production
+    networks:
+      - bigdata-network
+      - n8n-automation_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=n8n-automation_default"
+      - "traefik.http.routers.bigdata-api.rule=Host(`ww2.bigdata.net.co`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.bigdata-api.entrypoints=websecure"
+      - "traefik.http.routers.bigdata-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.bigdata-api.loadbalancer.server.port=3006"
+
+  web:
+    build: .
+    container_name: bigdata-web
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./src:/usr/share/nginx/html
+    depends_on:
+      - api
+    networks:
+      - bigdata-network
+      - n8n-automation_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=n8n-automation_default"
+      - "traefik.http.routers.bigdata-web.rule=Host(`ww2.bigdata.net.co`)"
+      - "traefik.http.routers.bigdata-web.entrypoints=websecure"
+      - "traefik.http.routers.bigdata-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.bigdata-web.loadbalancer.server.port=80"
+
+networks:
+  bigdata-network:
+    driver: bridge
+
+  n8n-automation_default:
+    external: true

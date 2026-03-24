@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="BigData.net.co - Proveedor de Internet Fibra Óptica, Hosting, VPS y Servidores Dedicados en Cajicá.">
+    <title>BigData.net.co | Internet Fibra Óptica, Edge Cloud Colombia Hosting & Cloud Solutions, Vps , Inteligencia
+        Artificial,</title>
+    <link rel="icon" href="assets/images/favicon/favicon-b.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="assets/images/favicon/site.webmanifest">
+    <link rel="stylesheet" href="css/styles.css?v=dev_fix_003">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <img src="assets/images/logo.png" alt="BigData Logo">
+            </a>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#inicio" class="active">Inicio</a>
+                <a href="#internet">Internet Fibra</a>
+                <a href="#hosting">Hosting & VPS</a>
+                <a href="#corporativo">Desarrollo & TI</a>
+                <a href="#infraestructura">Infraestructura</a>
+                <a href="#contacto">Contacto</a>
+                <a href="/panel/index.html" class="login-link">🔐 Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Map -->
+    <section class="hero" id="inicio">
+        <!-- SVG Map from Big4Net Reference -->
+        <div style="width:100%;max-width:1000px;margin-bottom:2rem;position:relative;">
+            <svg viewBox="0 0 970 312"
+                style="width:100%;height:auto;display:block;border-radius:20px;background:#000;box-shadow:0 4px 20px rgba(0,0,0,0.3);"
+                aria-label="Mapa mundial red">
+                <!-- Map Background GIF -->
+                <image href="assets/gifs/internet-usage-time-of-day1.gif" x="0" y="0" width="970" height="312"
+                    preserveAspectRatio="xMidYMid slice" />
+
+                <!-- POPs Overlay -->
+                <circle cx="271" cy="129" r="6.9" fill="#38bdf8" stroke="#fff" stroke-width="2" /> <!-- Miami -->
+                <circle cx="370" cy="265" r="8.6" fill="#2563eb" stroke="#fff" stroke-width="2" /> <!-- Sao Paulo -->
+
+                <!-- Colombia Cluster -->
+                <circle cx="286" cy="180" r="6.9" fill="#ef4444" stroke="#fff" stroke-width="2" /> <!-- Nodo Central -->
+                <circle cx="284" cy="176" r="5" fill="#f59e0b" stroke="#fff" stroke-width="1.5" /> <!-- Odata -->
+                <circle cx="286" cy="186" r="5" fill="#10b981" stroke="#fff" stroke-width="1.5" /> <!-- Cajicá -->
+                <circle cx="258" cy="250" r="5" fill="#8b5cf6" stroke="#fff" stroke-width="1.5" /> <!-- EdgeUno -->
+
+                <!-- Connection Lines -->
+                <path d="M256 254 Q299 187 278 139" stroke="#38bdf8" stroke-width="2" fill="none" stroke-dasharray="5,5"
+                    opacity="0.9">
+                    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="14s" repeatCount="indefinite" />
+                </path>
+
+                <path d="M378 267 Q269 197 278 139" stroke="#38bdf8" stroke-width="2" fill="none" stroke-dasharray="5,5"
+                    opacity="0.9">
+                    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="14s" repeatCount="indefinite" />
+                </path>
+            </svg>
+            <div
+                style="position: absolute; bottom: 5px; left: 5px; background: rgba(15, 23, 42, 0.9); padding: 5px; border-radius: 20px; font-size: 0.65rem; color: #f8fafc; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: grid; grid-template-columns: 1fr 1fr; gap: 5px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(3px);">
+                <div><span style="color:#ef4444">●</span> Colombia</div>
+                <div><span style="color:#38bdf8">●</span> Miami</div>
+                <div><span style="color:#f59e0b">●</span> Odata Cota</div>
+                <div><span style="color:#8b5cf6">●</span> EdgeUno BG1</div>
+                <div style="grid-column: span 2;"><span style="color:#10b981">●</span>Cajicá InternetXa</div>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <h1>Infraestructura Digital de <br><span style="color:var(--primary-color)">Clase Mundial</span> en Colombia
+            </h1>
+            <p>Proveedor ISP Fibra Óptica + Data Center + Soluciones Cloud + Software e inteligencia Artificial.
+                Conectividad directa a puntos de intercambio
+                y nodos internacionales.</p>
+            <div style="display:flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#internet" class="cta-button">Ver Planes Internet</a>
+                <a href="#hosting" class="cta-button"
+                    style="background:#fff; color:var(--primary-color); border: 2px solid var(--primary-color)">Hosting
+                    & Cloud</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="why-us">
+        <h2 class="section-title">¿Por qué BigData Sas?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <h3>Alta Velocidad Simétrica</h3>
+                <p>Fibra óptica FTTH directa a tu hogar o empresa. Velocidades simétricas reales para subir y bajar
+                    contenido sin esperas. Internet Libre sin contratos de permanencia, solo la calidad da esta garantia
+                </p>
+            </div>
+            <div class="feature-card">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3>Redundancia & Uptime</h3>
+                <p>Infraestructura propia con salidas redundantes y nodos internacionales. Garantía de disponibilidad
+                    para servicios críticos.</p>
+                <h3>Inteligencia Artificial</h3>
+                <p>Infraestructura propia con Gpu en Servidores Dedicados.</p>
+            </div>
+            <div class="feature-card">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <h3>Soporte Especializado</h3>
+                <p>Ingenieros certificados en Mikrotik, Ubiquiti y Linux. Soporte técnico local 24/7 real, sin bots.</p>
+                <h3>Especializado en LLM/IA</h3>
+                <p>Ingenieros implentaodores ollama, n8n, open ai, vision ia, chat boot ia, reconocimiento
+                    desentimientos ia
+                <p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- INTERNET PLANS Section (Merged from Old Site) -->
+    <section class="services" id="internet" style="background: var(--light-bg);">
+        <h2 class="section-title">Internet Fibra Óptica</h2>
+        <p class="section-subtitle">Conectividad FTTH estable y rápida en Cajicá</p>
+
+        <!-- Urban Plans -->
+        <h3 style="text-align: center; color: var(--secondary-color); margin: 2rem 0;">📍 Zona Urbana</h3>
+        <p style="text-align:center; margin-bottom: 2rem;"><strong>Instalación:</strong> $59.900</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div>
+                    <h3>110 Mbps</h3>
+                    <span class="price-tag">$45.000 <span class="price-sub">/mes</span></span>
+                    <ul>
+                        <li>Velocidad Simétrica</li>
+                        <li>Fibra Óptica FTTH</li>
+                        <li>Ideal Hogar</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/573017196089?text=Hola, info plan Urbano 110Mbps" class="cta-button"
+                    style="width:100%; text-align:center;">Contratar</a>
+            </div>
+            <div class="service-card" style="border: 2px solid var(--primary-color); transform: scale(1.02);">
+                <div>
+                    <span class="highlight-badge">MÁS VENDIDO</span>
+                    <h3>200 Mbps</h3>
+                    <span class="price-tag">$65.000 <span class="price-sub">/mes</span></span>
+                    <ul>
+                        <li>Velocidad Simétrica</li>
+                        <li>Ideal Streaming 4K</li>
+                        <li>Múltiples Dispositivos</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/573017196089?text=Hola, info plan Urbano 200Mbps" class="cta-button"
+                    style="width:100%; text-align:center;">Contratar</a>
+            </div>
+            <div class="service-card">
+                <div>
+                    <h3>300 Mbps</h3>
+                    <span class="price-tag">$85.000 <span class="price-sub">/mes</span></span>
+                    <ul>
+                        <li>Velocidad Simétrica</li>
+                        <li>Ideal Gamer / Pro</li>
+                        <li>Prioridad de Tráfico</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/573017196089?text=Hola, info plan Urbano 300Mbps" class="cta-button"
+                    style="width:100%; text-align:center;">Contratar</a>
+            </div>
+        </div>
+
+        <!-- Rural Plans -->
+        <h3 style="text-align: center; color: var(--secondary-color); margin: 4rem 0 2rem 0;">🌾 Zona Rural</h3>
+        <p style="text-align:center; margin-bottom: 2rem;"><strong>Instalación:</strong> $90.000</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div>
+                    <h3>100 Mbps</h3>
+                    <span class="price-tag">$65.000 <span class="price-sub">/mes</span></span>
+                    <ul>
+                        <li>Cobertura Rural Ampliada</li>
+                        <li>Alta Estabilidad</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/573017196089?text=Hola, info plan Rural 100Mbps" class="cta-button"
+                    style="width:100%; text-align:center;">Contratar</a>
+            </div>
+            <div class="service-card">
+                <div>
+                    <h3>200 Mbps</h3>
+                    <span class="price-tag">$85.000 <span class="price-sub">/mes</span></span>
+                    <ul>
+                        <li>Velocidad Superior</li>
+                        <li>Soporte Prioritario</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/573017196089?text=Hola, info plan Rural 200Mbps" class="cta-button"
+                    style="width:100%; text-align:center;">Contratar</a>
+            </div>
+            <div class="service-card">
+                <div>
+                    <h3>300 Mbps</h3>
+                    <span class="price-tag">$105.000 <span class="price-sub">/mes</span></span>
+                    <ul>
+                        <li>Máximo Rendimiento Rural</li>
+                        <li>Simetría Garantizada</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/573017196089?text=Hola, info plan Rural 300Mbps" class="cta-button"
+                    style="width:100%; text-align:center;">Contratar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOSTING & VPS Section (From Big4Net) -->
+    <section class="services" id="hosting" style="background: var(--light-bg);">
+        <h2 class="section-title">Hosting & Cloud Empresarial</h2>
+        <p class="section-subtitle">Infraestructura de clase mundial para tus aplicaciones web</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div>
+                    <span style="font-size:3rem;">☁️</span>
+                    <h3>Hosting Web Pro</h3>
+                    <p>Infraestructura optimizada: Linux cPanel, Windows y Java. Almacenamiento NVMe.</p>
+                    <ul>
+                        <li>Desde $7.600 COP/mes</li>
+                        <li>Dominio .COM Incluido</li>
+                        <li>Certificado SSL Gratis</li>
+                        <li>Soporte Técnico 24/7</li>
+                        <li>Almacenamiento NVMe</li>
+                        <li>Bases de Datos Ilimitadas</li>
+                        <li>Tráfico sin restricciones</li>
+                        <li>Panel de control intuitivo</li>
+                    </ul>
+                </div>
+                <button class="cta-button show-hosting-panel" data-panel="hosting" style="width:100%">Ver
+                    Planes</button>
+            </div>
+            <div class="service-card">
+                <div>
+                    <span style="font-size:3rem;">🖥️</span>
+                    <h3>VPS Privados</h3>
+                    <p>Servidores Virtuales con recursos garantizados (RAM/CPU). Root Access total.</p>
+                    <ul>
+                        <li>Discos NVMe</li>
+                        <li>Snapshots Automáticos</li>
+                        <li>IP Dedicada</li>
+                        <li>Panel Web WHM</li>
+                        <li>Soporte 24/7</li>
+                        <li>Desde 1 Tera de trafico</li>
+                    </ul>
+                </div>
+                <button id="open-vultr-btn" class="cta-button open-vultr-trigger" data-region="mia"
+                    style="width:100%; text-align:center; margin-top:0.5rem; background: #fff; color: #2563eb; border: 2px solid #2563eb;">⚡
+                    Servidores Vps Miami</button>
+                <button id="open-vultr-btn-2" class="cta-button open-vultr-trigger" data-region="atl"
+                    style="width:100%; text-align:center; margin-top:0.5rem; background: #fff; color: #2563eb; border: 2px solid #2563eb;">⚡
+                    Servidores Vps Atlanta</button>
+                <button id="open-vultr-btn-3" class="cta-button open-vultr-trigger" data-region="dal"
+                    style="width:100%; text-align:center; margin-top:0.5rem; background: #fff; color: #2563eb; border: 2px solid #2563eb;">⚡
+                    Servidor VPS Dallas</button>
+            </div>
+            <div class="service-card">
+                <div>
+                    <span style="font-size:3rem;">🏢</span>
+                    <h3>Servidores Dedicados</h3>
+                    <p>Hardware físico exclusivo para tu empresa en Colombia. Sin virtualización compartida.</p>
+                    <ul>
+                        <li>Procesadores AMD EPYC / Intel Xeon</li>
+                        <li>Ancho de banda 1Gbps+</li>
+                        <li>Anti-DDoS Pro</li>
+                        <li>IP Dedicada</li>
+                        <li>Discos NVMe</li>
+                        <li>Snapshots Automáticos</li>
+                    </ul>
+                </div>
+                <button id="open-dedicated-btn" class="cta-button open-dedicated-trigger"
+                    style="width:100%; text-align:center;">Servidor Dedicado Colombia</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- IT & Development Services Section -->
+    <section class="services" id="corporativo" style="background: var(--light-bg);">
+        <h2 class="section-title">Soluciones Corporativas & Desarrollo</h2>
+        <p class="section-subtitle">Transformación Digital e Inteligencia Artificial aplicada a su negocio</p>
+
+        <div class="services-grid">
+            <div class="service-card" style="border: 1px solid #e0e7ff;">
+                <div class="service-icon" style="font-size: 2.5rem;">🤖</div>
+                <h3 style="font-size: 1.4rem;">IA & Automatización</h3>
+                <p>Implementación de flujos de trabajo inteligentes y soluciones IoT.</p>
+                <ul>
+                    <li><strong>Automatización:</strong> Integraciones con n8n</li>
+                    <li><strong>IoT:</strong> Dashboards en Node-RED</li>
+                    <li><strong>Smart Home:</strong> Home Assistant</li>
+                    <li><strong>IA:</strong> Chatbots y Agentes</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=573017196089&text&type=phone_number&app_absent=0"
+                    class="cta-button" style="width:100%; text-align:center; padding: 0.8rem;">Consultar</a>
+            </div>
+
+            <div class="service-card" style="border: 1px solid #e0e7ff;">
+                <div class="service-icon" style="font-size: 2.5rem;">💻</div>
+                <h3 style="font-size: 1.4rem;">Desarrollo Moderno</h3>
+                <p>Software a medida con stack tecnológico actual (antes LAMP, hoy JS/Python).</p>
+                <ul>
+                    <li><strong>Backend:</strong> Node.js, Python</li>
+                    <li><strong>Frontend:</strong> React, Vue, Modern Web</li>
+                    <li><strong>Apps:</strong> Desarrollo a medida</li>
+                    <li><strong>Integraciones:</strong> APIs REST/GraphQL</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=573017196089&text&type=phone_number&app_absent=0"
+                    class="cta-button" style="width:100%; text-align:center; padding: 0.8rem;">Cotizar
+                    Proyecto</a>
+            </div>
+
+            <div class="service-card" style="border: 1px solid #e0e7ff;">
+                <div class="service-icon" style="font-size: 2.5rem;">🏢</div>
+                <h3 style="font-size: 1.4rem;">Outsourcing TI</h3>
+                <p>30+ años de experiencia gestionando departamentos de sistemas.</p>
+                <ul>
+                    <li><strong>Soporte:</strong> Help Desk & Mesa de Ayuda</li>
+                    <li><strong>Gestión:</strong> Tercerización completa de TI</li>
+                    <li><strong>Auditoría:</strong> Seguridad y Procesos</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=573017196089&text&type=phone_number&app_absent=0"
+                    class="cta-button" style="width:100%; text-align:center; padding: 0.8rem;">Contactar</a>
+            </div>
+
+            <div class="service-card" style="border: 1px solid #e0e7ff;">
+                <div class="service-icon" style="font-size: 2.5rem;">🔌</div>
+                <h3 style="font-size: 1.4rem;">Redes & Cableado</h3>
+                <p>Infraestructura física certificada para empresas y oficinas.</p>
+                <ul>
+                    <li><strong>Cableado:</strong> Cat 6A, 7 y Fibra Óptica</li>
+                    <li><strong>Certificación:</strong> Normas EIA/TIA</li>
+                    <li><strong>Seguridad:</strong> CCTV y Control de Acceso</li>
+                    <li><strong>Voz IP:</strong> Asterisk & Telefonía</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=573017196089&text&type=phone_number&app_absent=0"
+                    class="cta-button" style="width:100%; text-align:center; padding: 0.8rem;">Agendar
+                    Visita</a>
+            </div>
+
+            <div class="service-card" style="border: 3px solid #2463eb; background: #081e681e;">
+                <div class="service-icon" style="font-size: 2.5rem;">🔑</div>
+                <h3 style="font-size: 1.4rem;">Licenciamiento & Legalización</h3>
+                <p>Distribuidores autorizados: Nexsys & MPS. Kits de legalización completos.</p>
+                <ul>
+                    <li><strong>Microsoft:</strong> Windows, Server, Office 365</li>
+                    <li><strong>Seguridad:</strong> Kaspersky Antivirus</li>
+                    <li><strong>Kits:</strong> Server + CALs + SO</li>
+                    <li><strong>Legalización:</strong> Auditoría y Cumplimiento</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send/?phone=573017196089&text&type=phone_number&app_absent=0"
+                    class="cta-button" style="width:100%; text-align:center; padding: 0.8rem;">Cotizar
+                    Licencias</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="services" style="background: #1e293b; padding: 3rem 0;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <p
+                style="text-transform: uppercase; letter-spacing: 2px; color: #64748b; font-weight: bold; margin-bottom: 2rem;">
+                Certificaciones & Alianzas</p>
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; filter: grayscale(100%); transition: filter 0.3s; cursor: pointer;"
+                    onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%)'">
+                    <span style="font-size: 2.5rem;">🏆</span>
+                    <div style="text-align: left;">
+                        <span style="display: block; font-weight: bold; color: #555;">Microsoft</span>
+                        <span style="color: #ea580c; font-weight: 800; font-size: 1.1rem;">Gold Partner</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; filter: grayscale(100%); transition: filter 0.3s; cursor: pointer;"
+                    onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%)'">
+                    <span style="font-size: 2.5rem;">👨‍💻</span>
+                    <div style="text-align: left;">
+                        <span style="display: block; font-weight: bold; color: #555;">Google</span>
+                        <span style="color: #4285F4; font-weight: 800; font-size: 1.1rem;">Developer Program</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; filter: grayscale(100%); transition: filter 0.3s; cursor: pointer;"
+                    onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%)'">
+                    <span style="font-size: 2.5rem;">🎓</span>
+                    <div style="text-align: left;">
+                        <span style="display: block; font-weight: bold; color: #555;">Certificaciones</span>
+                        <span style="color: #2563eb; font-weight: 800; font-size: 1.1rem;">Cisco & Mikrotik</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WISP & Solutions Section -->
+    <section class="services" id="infraestructura">
+        <h2 class="section-title">Soluciones Especializadas</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>📡 WISP & Enlaces</h3>
+                <p>Infraestructura inalámbrica para zonas de difícil acceso. Equipos Ubiquiti/Mimosa.</p>
+            </div>
+            <div class="service-card">
+                <h3>🔧 Consultoría Mikrotik</h3>
+                <p>Configuración experta de BGP, OSPF, MPLS y optimización de redes ISP.</p>
+            </div>
+            <div class="service-card">
+                <h3>🌍 Conectividad IXP</h3>
+                <p>Acceso directo a NAP Colombia y PIT Colombia. Menor latencia, mayor velocidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (Preserved) -->
+    <section class="gallery" id="proyectos">
+        <h2 class="section-title">Nuestra Infraestructura Real</h2>
+        <p class="section-subtitle">Operaciones diarias y despliegue de red</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="assets/images/80d88413-cf09-4d57-a9d8-ea7d16d3cc5d.jpeg" alt="Torre">
+            </div>
+            <div class="gallery-item"><img src="assets/images/0afb591f-13bb-448c-bd20-13bfda0c7354.jpeg" alt="Equipos">
+            </div>
+            <div class="gallery-item"><img src="assets/images/e367b302-a536-4fde-8ab3-4380595fd6f8.jpeg" alt="Fibra">
+            </div>
+            <div class="gallery-item"><img src="assets/images/b241b93e-42d8-42d7-ad99-5758f65960ce.jpeg" alt="Altura">
+            </div>
+            <div class="gallery-item"><img src="assets/images/217c10b9-ecba-418e-894f-89719cf01b09.jpeg" alt="Flota">
+            </div>
+            <div class="gallery-item"><img src="assets/images/6323b4f3-6b3c-4dce-a7e3-181ce5ad419d.jpeg" alt="Técnicos">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="features" id="contacto" style="background: var(--light-bg);">
+        <h2 class="section-title">Contáctanos</h2>
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Estamos listos para conectar tu hogar o empresa con la
+                mejor tecnología.</p>
+            <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+                <div class="feature-card"
+                    style="padding: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                    <span style="font-size: 1.5rem;">📱</span>
+                    <div style="text-align: left;">
+                        <h4>WhatsApp / Celular</h4>
+                        <a href="https://wa.me/573017196089"
+                            style="color:var(--primary-color); font-weight:bold; text-decoration:none;">301 719 60
+                            89</a>
+                    </div>
+                </div>
+                <div class="feature-card"
+                    style="padding: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                    <span style="font-size: 1.5rem;">📧</span>
+                    <div style="text-align: left;">
+                        <h4>Email</h4>
+                        <a href="mailto:contacto@bigdata.net.co"
+                            style="color:var(--primary-color); font-weight:bold; text-decoration:none;">contacto@bigdata.net.co</a>
+                    </div>
+                </div>
+                <div class="feature-card"
+                    style="padding: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                    <span style="font-size: 1.5rem;">📍</span>
+                    <div style="text-align: left;">
+                        <h4>Oficina</h4>
+                        <p>Calle 2 # 6-31 Casa 2, Cajicá</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div style="text-align: center;">
+                <img src="assets/images/logo.png" alt="Logo Footer"
+                    style="height: 60px; filter: brightness(0) invert(1);">
+            </div>
+            <h3>www.BigData.net.co</h3>
+            <p>Infraestructura de Red, Fibra Óptica y Soluciones Cloud</p>
+            <p>Desarrollo de Sofrware, inteligencia Artificial, Ciencia de datos</p>
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#internet">Internet</a>
+                <a href="#hosting">Hosting</a>
+                <a href="#contacto">Contacto</a>
+                <a href="/panel/index.html" class="login-link">🔐 Login</a>
+
+            </div>
+            <p>&copy; 2025 BigData s.a.s Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Hosting Modal -->
+    <div id="hosting-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2 style="color:var(--primary-color); margin-bottom:1.5rem;">Planes de Hosting</h2>
+
+            <div class="hosting-plans-list" style="display: grid; gap: 1rem;">
+                <!-- Plan 1: Linux cPanel (Competitor $8.492 -> Now $7.600) -->
+                <div class="hosting-plan-card" data-plan-id="hosting-linux" data-plan-name="Cloud Linux cPanel"
+                    data-plan-price="7.600">
+                    <h3 style="margin-bottom: 0.5rem;">🐧 Cloud Linux cPanel</h3>
+                    <p class="price-tag" style="font-size: 1.5rem; font-weight: 800; color: var(--text-color);">$7.600
+                        COP<span style="font-size: 0.8rem; color: #64748b;">/mes</span></p>
+                    <ul style="font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; list-style: none;">
+                        <li>✅ 12 GB Almacenamiento NVMe</li>
+                        <li>✅ 30 Cuentas de Correo Pro</li>
+                        <li>✅ Panel cPanel / DirectAdmin</li>
+                        <li>✅ 2 Bases de Datos MySQL</li>
+                        <li>✅ Dominio .COM Incluido</li>
+                    </ul>
+                </div>
+
+                <!-- Plan 2: Windows (Competitor $10.617 -> Now $9.550) -->
+                <div class="hosting-plan-card" data-plan-id="hosting-windows" data-plan-name="Cloud Web Windows"
+                    data-plan-price="9.550">
+                    <h3 style="margin-bottom: 0.5rem;">🪟 Cloud Web Windows</h3>
+                    <p class="price-tag" style="font-size: 1.5rem; font-weight: 800; color: var(--text-color);">$9.550
+                        COP<span style="font-size: 0.8rem; color: #64748b;">/mes</span></p>
+                    <ul style="font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; list-style: none;">
+                        <li>✅ 4 GB Almacenamiento NVMe</li>
+                        <li>✅ 15 Cuentas de Correo</li>
+                        <li>✅ Bases de Datos SQL Server / MySQL</li>
+                        <li>✅ Soporte ASP.NET</li>
+                        <li>✅ Tránsito sin límites</li>
+                    </ul>
+                </div>
+
+                <!-- Plan 3: Java (Competitor $12.491 -> Now $11.200) -->
+                <div class="hosting-plan-card" data-plan-id="hosting-java" data-plan-name="Enterprise Java App"
+                    data-plan-price="11.200">
+                    <h3 style="margin-bottom: 0.5rem;">☕ Enterprise Java App</h3>
+                    <p class="price-tag" style="font-size: 1.5rem; font-weight: 800; color: var(--text-color);">$11.200
+                        COP<span style="font-size: 0.8rem; color: #64748b;">/mes</span></p>
+                    <ul style="font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; list-style: none;">
+                        <li>✅ 6 GB Almacenamiento NVMe</li>
+                        <li>✅ 256MB Memoria Heap (Doblamos competencia)</li>
+                        <li>✅ Soporte Java, JSP & Tomcat</li>
+                        <li>✅ Bases de Datos MySQL Dedicadas</li>
+                        <li>✅ Gestión de Dominio .COM Gratis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button id="hosting-next-btn" class="cta-button" disabled
+                style="width: 100%; text-align: center; margin-top: 2rem; opacity: 0.5;">
+                Continuar con el Plan Seleccionado
+            </button>
+        </div>
+    </div>
+
+    <!-- Vultr API Modal -->
+    <div id="vultr-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px;">
+            <button class="close-modal" id="close-vultr">&times;</button>
+            <div id="modal-step-plans" class="modal-step active">
+                <h2 style="color:var(--primary-color); margin-bottom:1.5rem;"> Planes en Tiempo Real</h2>
+                <div id="vultr-plans-container"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
+                    <p>Cargando datos desde Vultr...</p>
+                </div>
+                <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+                    <button id="plans-next-btn" class="cta-button" disabled style="opacity: 0.5;">Continuar con el Plan
+                        Seleccionado</button>
+                </div>
+            </div>
+
+            <div id="modal-step-form" class="modal-step">
+                <h2 style="color:var(--primary-color); margin-bottom:1.5rem;">Completar Solicitud</h2>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Ingresa tus datos para generar el link
+                    de pago y activar tu servicio.</p>
+
+                <form id="vps-lead-form"
+                    style="display: flex; flex-direction: column; gap: 0.8rem; max-width: 600px; margin: 0 auto;">
+
+                    <div id="selected-plan-display"
+                        style="padding: 1rem; background: #f8fafc; border: 1px dashed var(--primary-color); border-radius: 8px; text-align: center; font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">
+                        Ningún plan seleccionado
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="text" id="lead-name" placeholder="Nombre" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                        <input type="text" id="lead-lastname" placeholder="Apellido" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem;">
+                        <input type="email" id="lead-email" placeholder="Tu Email" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                        <select id="lead-user-type" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; background: white;">
+                            <option value="">¿Perfil?</option>
+                            <option value="Desarrollador">Desarrollador / Programador</option>
+                            <option value="Agencia">Agencia / Freelance</option>
+                            <option value="Dueño de Negocio">Dueño de Negocio</option>
+                            <option value="Administrador IT">Administrador IT</option>
+                            <option value="Estudiante">Estudiante / Curioso</option>
+                        </select>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <select id="lead-doc-type" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; background: white;">
+                            <option value="CC">Cédula (CC)</option>
+                            <option value="NIT">NIT (Empresa)</option>
+                            <option value="CE">Cédula Ext.</option>
+                            <option value="PP">Pasaporte</option>
+                        </select>
+                        <input type="text" id="lead-doc-number" placeholder="Número de Documento" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div style="display: flex; gap: 0.4rem;">
+                            <select id="lead-country-code" required
+                                style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; width: 85px; background: white; font-size: 0.9rem;">
+                                <option value="+57">🇨🇴 +57</option>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+54">🇦🇷 +54</option>
+                                <option value="+56">🇨🇱 +56</option>
+                                <option value="+51">🇵🇪 +51</option>
+                            </select>
+                            <input type="text" id="lead-whatsapp" placeholder="Celular (Para SMS)" required
+                                style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; flex: 1;">
+                        </div>
+                        <input type="text" id="lead-company" placeholder="Empresa (Opcional)"
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr; gap: 1rem;">
+                        <input type="text" id="lead-address" placeholder="Dirección Física" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="text" id="lead-dept" placeholder="Departamento" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                        <input type="text" id="lead-city" placeholder="Ciudad" required
+                            style="padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px;">
+                    </div>
+
+                    <input type="hidden" id="selected-plan-id" required>
+                    <input type="hidden" id="selected-plan-price" required>
+                    <input type="hidden" id="selected-plan-name" required>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                        <button type="button" id="form-back-btn" class="cta-button"
+                            style="background: #eee; color: #555; padding: 0.6rem 1.5rem;">Atrás</button>
+                        <button type="submit" class="cta-button" style="flex: 1; padding: 0.6rem;">🚀 Solicitar
+                            Código</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="modal-step-activation" class="modal-step">
+                <h2 style="color:var(--primary-color); margin-bottom:1.5rem;">Verificación de Seguridad</h2>
+                <div style="text-align:center; max-width: 400px; margin: 0 auto;">
+                    <p style="margin-bottom: 1rem;">Hemos enviado un <strong>código de 6 dígitos</strong> a tu celular y
+                        correo.</p>
+                    <input type="text" id="otp-input" placeholder="000 000" maxlength="6"
+                        style="font-size: 2rem; letter-spacing: 0.5rem; text-align: center; width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid var(--primary-color); border-radius: 12px;">
+
+                    <button id="verify-otp-btn" class="cta-button" style="width: 100%; font-size: 1.1rem;">Verificar
+                        Código</button>
+                    <p id="otp-error" style="color: red; margin-top: 10px; display: none;"></p>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 1rem; cursor: pointer;">¿No llegó? <span
+                            style="text-decoration: underline;">Reenviar</span></p>
+                </div>
+            </div>
+
+            <div id="modal-step-payment" class="modal-step">
+                <h2 style="color:var(--primary-color); margin-bottom:1.5rem;">Datos de Facturación</h2>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; text-align: center;">
+                    Usuario Verificado. Completa tus datos fiscales para proceder con el pago.
+                </p>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 1rem; max-width: 450px; margin: 0 auto; text-align: left;">
+
+                    <div
+                        style="background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #bbf7d0; text-align: center; margin-bottom: 1rem;">
+                        ✅ Cuenta creada exitosamente en BigData Cloud
+                    </div>
+
+                    <button id="final-payment-btn" class="cta-button"
+                        style="width: 100%; padding: 1rem; margin-top: 1rem; font-size: 1.1rem;">
+                        💳 Continuar al Pago (Wompi)
+                    </button>
+
+                    <p style="font-size: 0.8rem; color: #94a3b8; text-align: center;">
+                        🔒 Pago procesado de forma segura por Wompi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script type="module" src="js/main.js?v=7"></script>
+</body>
+
+</html>

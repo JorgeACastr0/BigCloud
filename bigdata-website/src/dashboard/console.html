@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consola VPS | BigData Cloud</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-dark: #1e293b;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --error: #ef4444;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-dark);
+            color: white;
+            font-family: 'Inter', -apple-system, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #toolbar {
+            background: var(--panel-dark);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .tool-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #475569;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-danger {
+            background: #450a0a;
+            color: #fca5a5;
+        }
+
+        .btn-danger:hover {
+            background: #7f1d1d;
+        }
+
+        .btn-warning {
+            background: #78350f;
+            color: #fcd34d;
+        }
+
+        .btn-warning:hover {
+            background: #92400e;
+        }
+
+        #screen {
+            flex: 1;
+            overflow: auto;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #status {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .running {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .waiting {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        #info-overlay {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(30, 41, 59, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            backdrop-filter: blur(8px);
+            max-width: 300px;
+            font-size: 13px;
+            animation: slideUp 0.5s ease-out;
+            z-index: 100;
+        }
+
+        #info-overlay .close-tip {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        #info-overlay .close-tip:hover {
+            color: white;
+        }
+
+        /* Modal Portapapeles */
+        #paste-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--panel-dark);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            z-index: 200;
+            width: 350px;
+        }
+
+        #paste-modal textarea {
+            width: 100%;
+            height: 100px;
+            background: #0f172a;
+            color: #34d399;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            resize: none;
+            box-sizing: border-box;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .key-tip {
+            display: inline-block;
+            background: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #475569;
+            font-family: monospace;
+            margin: 0 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="toolbar">
+        <div class="tool-group">
+            <div style="font-weight: bold; color: var(--accent);">BIGDATA CLOUD</div>
+            <div style="color: var(--text-muted); font-size: 12px; border-left: 1px solid #475569; padding-left: 15px;">
+                <span id="vmid-label">...</span>
+            </div>
+        </div>
+
+        <div class="tool-group">
+            <button class="btn" onclick="openPasteModal()" title="Pega contraseñas o comandos largos">
+                📋 Pegar Texto
+            </button>
+            <button class="btn" onclick="sendCtrlAltDel()" title="Enviar señal Ctrl+Alt+Del">
+                ⌨️ CAD
+            </button>
+            <button class="btn btn-warning" onclick="hardReboot()"
+                title="Reiniciar VPS desde Proxmox (Si CAD no sirve)">
+                ⚡ Reinicio Forzado
+            </button>
+            <button class="btn btn-primary" onclick="reconnect()">
+                🔄 Reconectar
+            </button>
+            <div id="status"><span class="badge waiting">CONECTANDO...</span></div>
+        </div>
+    </div>
+
+    <div id="screen">
+        <!-- noVNC canvas -->
+    </div>
+
+    <!-- Modal de Pegado -->
+    <div id="paste-modal">
+        <div style="font-weight: bold; margin-bottom: 5px;">Portapapeles Virtual</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Pega tu clave aquí y se "tecleará" en la consola.</div>
+        <textarea id="paste-text" placeholder="Pega aquí..."></textarea>
+        <div class="modal-footer">
+            <button class="btn" onclick="closePasteModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="typeText()">Enviar a Consola</button>
+        </div>
+    </div>
+
+    <div id="info-overlay">
+        <span class="close-tip" onclick="this.parentElement.style.display='none'">×</span>
+        <div style="font-weight: bold; margin-bottom: 8px; color: #fbbf24;">💡 Tip de Seguridad</div>
+        <p style="margin: 0; line-height: 1.4; color: #cbd5e1;">
+            En consolas Linux, la <b>contraseña es invisible</b> mientras escribes. Escribe <span
+                class="key-tip">root</span>, pulsa <span class="key-tip">Enter</span>, luego escribe tu clave y vuelve a
+            pulsar <span class="key-tip">Enter</span>.
+        </p>
+    </div>
+
+    <script type="module">
+        import RFB from 'https://cdn.jsdelivr.net/npm/@novnc/novnc@1.4.0/core/rfb.js';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const dbId = urlParams.get('id');
+        const vmid = urlParams.get('vmid');
+        const type = urlParams.get('type');
+
+        document.getElementById('vmid-label').textContent = `VMID: ${vmid} (${type})`;
+
+        let rfb;
+
+        async function connect() {
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = '<span class="badge waiting">NEGOCIANDO TICKET...</span>';
+
+            try {
+                if (!dbId) throw new Error("ID no válido");
+
+                const resp = await fetch(`/api/cloud/console/${dbId}`, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const data = await resp.json();
+
+                if (!data.success) throw new Error(data.error || "Fallo en API");
+
+                const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                const bridgeUrl = `${protocol}//${window.location.host}/api/vps-console?ticket=${encodeURIComponent(data.ticket)}&port=${data.port}&vmid=${data.vmid}&type=${data.type}`;
+
+                rfb = new RFB(document.getElementById('screen'), bridgeUrl);
+
+                rfb.addEventListener("connect", () => {
+                    statusEl.innerHTML = '<span class="badge running">CONECTADO</span>';
+                    // Enfocar automáticamente el teclado al conectar
+                    rfb.focus();
+                });
+
+                rfb.addEventListener("disconnect", (e) => {
+                    statusEl.innerHTML = '<span class="badge error">DESCONECTADO</span>';
+                });
+
+                rfb.addEventListener("credentialsrequired", () => {
+                    rfb.sendCredentials({ password: data.ticket });
+                });
+
+                rfb.scaleViewport = true;
+                rfb.resizeSession = true;
+
+            } catch (err) {
+                statusEl.innerHTML = `<span class="badge error">ERROR: ${err.message}</span>`;
+            }
+        }
+
+        window.reconnect = function () {
+            if (rfb) rfb.disconnect();
+            connect();
+        }
+
+        window.sendCtrlAltDel = function () {
+            if (rfb) {
+                console.log("⌨️ Enviando Ctrl+Alt+Del (Manual Sequence)...");
+                // Sequence manual compatible para Linux/Windows
+                rfb.sendKey(0xFFE3, "ControlLeft", true); // Ctrl Down
+                rfb.sendKey(0xFFE9, "AltLeft", true);     // Alt Down
+                rfb.sendKey(0xFFFF, "Delete", true);      // Del Down
+
+                setTimeout(() => {
+                    rfb.sendKey(0xFFFF, "Delete", false);     // Del Up
+                    rfb.sendKey(0xFFE9, "AltLeft", false);    // Alt Up
+                    rfb.sendKey(0xFFE3, "ControlLeft", false); // Ctrl Up
+                }, 100);
+            }
+        }
+
+        window.hardReboot = async function () {
+            if (!confirm("⚠️ ¿Estás seguro de REINICIAR este VPS? Se perderán trabajos no guardados.")) return;
+
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "⏳ Reiniciando...";
+            btn.disabled = true;
+
+            try {
+                const resp = await fetch(`/api/cloud/controlar/${dbId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ accion: 'reboot' })
+                });
+                const data = await resp.json();
+                if (data.success) {
+                    alert("✅ Orden de reinicio enviada. El VPS volverá en unos segundos.");
+                    reconnect();
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (err) {
+                alert("❌ Falló el reinicio: " + err.message);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        window.reconnect = function () {
+            if (rfb) rfb.disconnect();
+            connect();
+        }
+
+        // Portapapeles Virtual (Typing Simulation)
+        window.openPasteModal = function () {
+            document.getElementById('paste-modal').style.display = 'block';
+            document.getElementById('paste-text').focus();
+        }
+
+        window.closePasteModal = function () {
+            document.getElementById('paste-modal').style.display = 'none';
+            document.getElementById('paste-text').value = '';
+        }
+
+        window.typeText = function () {
+            const text = document.getElementById('paste-text').value;
+            if (rfb && text) {
+                console.log("⌨️ Tecleando texto en consola...");
+                for (let i = 0; i < text.length; i++) {
+                    const charCode = text.charCodeAt(i);
+                    // noVNC sendKey acepta keysyms. Para caracteres estándar ASCII, 
+                    // los keysyms coinciden con el charCode.
+                    rfb.sendKey(charCode);
+                }
+                // Enviar un Enter al final por comodidad
+                rfb.sendKey(0xFF0D); // Keysym para Return/Enter
+            }
+            closePasteModal();
+        }
+
+        connect();
+    </script>
+</body>
+
+</html>

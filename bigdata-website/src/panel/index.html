@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Clientes | BigData</title>
+  <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+
+<div class="login-card">
+  <img src="../assets/images/logo.png" class="logo" alt="BigData Cloud">
+
+  <h2>Ingreso clientes</h2>
+
+  <!-- Mensaje de sesión expirada -->
+  <div id="msg-expired" class="alert alert-warning" style="display:none;">
+    Tu sesión ha expirado. Inicia sesión nuevamente.
+  </div>
+
+  <!-- Mensaje de error de login -->
+  <div id="msg-error" class="alert alert-error" style="display:none;"></div>
+
+  <div class="form-group">
+    <input id="email" type="email" placeholder="Correo electrónico" autocomplete="email">
+    <span class="field-error" id="err-email"></span>
+  </div>
+
+  <div class="form-group">
+    <input id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
+    <span class="field-error" id="err-password"></span>
+  </div>
+
+  <button id="btn-login" onclick="login()">Ingresar</button>
+
+  <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+
+  <hr>
+
+  <h3>Pago rápido ISP</h3>
+  <input id="document" placeholder="Documento / NIT">
+  <button class="secondary">Pagar factura</button>
+</div>
+
+<script src="js/login.js"></script>
+</body>
+</html>

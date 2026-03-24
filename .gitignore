@@ -25,5 +25,38 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Docker volumes data
+# Claude Code settings locales
+.claude/
+
+# FOSSBilling / clientes cache y data runtime
+clientes/data/cache/
+clientes/data/log/
+clientes/data/uploads/
+
+# Docker volumes data - NUNCA subir al repo
 postgres/data/
+postgres/backup_*.sql
+clientes/mysql-data/
+monitoring/grafana_data/
+monitoring/influxdb_data/
+n8n-automation/n8n-data/
+evolution-api/qr_base64.txt
+evolution-api/qr_response.json
+mqtt/data/
+evolution-api/1
+postgres/*.backup.*
+
+# Carpeta anidada duplicada
+bigdata-website/bigdata-website/
+
+# Archivos stray sin extensión llamados "1"
+bigdata-website/1
+bigdata-website/src/css/1
+bigdata-website/src/panel/1
+bigdata-website/src/panel/css/1
+bigdata-website/src/panel/js/1
+bigdata-website/src/services/1
+
+# Scripts de debug temporales
+bigdata-website/backend/debug-login.js
+bigdata-website/backend/fix-admin.js

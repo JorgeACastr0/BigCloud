@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual User Creation - BigData</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        :root {
+            --primary: #38bdf8;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #334155;
+        }
+
+        h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 5px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: #0f172a;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+
+        .msg {
+            margin-top: 15px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>🛠️ Crear Usuario (Manual)</h2>
+        <form id="f">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="group"><label>Nombre</label><input type="text" id="n" required></div>
+                <div class="group"><label>Apellido</label><input type="text" id="a" required></div>
+            </div>
+            <div class="group"><label>Correo</label><input type="email" id="e" required></div>
+            <div class="group"><label>Password</label><input type="password" id="p" required></div>
+            <div class="group"><label>WhatsApp</label><input type="text" id="t" placeholder="+57"></div>
+            <div class="group"><label>Empresa</label><input type="text" id="em" placeholder="Opcional"></div>
+            <button type="submit" id="b">CREAR USUARIO</button>
+        </form>
+        <div id="m" class="msg"></div>
+    </div>
+
+    <script>
+        document.getElementById('f').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const b = document.getElementById('b');
+            const m = document.getElementById('m');
+            b.disabled = true; b.textContent = "Procesando...";
+            m.style.display = "none";
+
+            const data = {
+                nombre: document.getElementById('n').value,
+                apellido: document.getElementById('a').value,
+                email: document.getElementById('e').value,
+                password: document.getElementById('p').value,
+                telefono: document.getElementById('t').value,
+                empresa: document.getElementById('em').value
+            };
+
+            try {
+                const res = await axios.post('/api/admin/create-user', data);
+                m.textContent = "✅ " + res.data.message;
+                m.style.background = "#064e3b"; m.style.color = "#34d399";
+                m.style.display = "block";
+                document.getElementById('f').reset();
+            } catch (err) {
+                m.textContent = "❌ Error: " + (err.response?.data?.error || err.message);
+                m.style.background = "#7f1d1d"; m.style.color = "#f87171";
+                m.style.display = "block";
+            } finally {
+                b.disabled = false; b.textContent = "CREAR USUARIO";
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+Llaves del API para integración técnica
+Llave pública
+pub_test_7PHgC0EXcmpX4a6JOFuJbnzhbOR8ATOr
+Llave privada
+prv_test_Sfk4EXgQiAiD9rSH4SUyH8BfeGAYVvgh
+Secretos para integración técnica
+Eventos
+test_events_taIDckGqlXXWjlnNZYzpcayh8twvKFEU
+Integridad
+test_integrity_4C5UIXcm3IPcNBBqVlcRT3kKnW6jWvoI
+Consulta los siguientes links para entender cómo hacer una integración técnica:
+ Documentación y guías de integración
+ Referencia del API
+ Ambientes y llaves
+Modo de pruebas

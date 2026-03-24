@@ -1,0 +1,14 @@
+{
+  "name": "BigData.net.co",
+  "short_name": "BigData",
+  "icons": [
+    {
+      "src": "favicon-b.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0f172a",
+  "background_color": "#f8fafc",
+  "display": "standalone"
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Crear Usuario | BigData Cloud</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            background: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .admin-card {
+            background: #1e293b;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-card h2 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #0ea5e9;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .message.success {
+            background: #064e3b;
+            color: #34d399;
+            display: block;
+        }
+
+        .message.error {
+            background: #7f1d1d;
+            color: #f87171;
+            display: block;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-card">
+        <h2>🛠️ Admin: Crear Usuario</h2>
+        <form id="admin-user-form">
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" required placeholder="Ej: Juan">
+                </div>
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" id="apellido" required placeholder="Ej: Perez">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" id="email" required placeholder="usuario@bigdata.net.co">
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+
+            <div class="form-group">
+                <label>Empresa (Opcional)</label>
+                <input type="text" id="empresa" placeholder="Nombre de la empresa">
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Tipo Doc</label>
+                    <select id="tipo_documento">
+                        <option value="CC">CC</option>
+                        <option value="NIT">NIT</option>
+                        <option value="CE">CE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Documento</label>
+                    <input type="text" id="documento" placeholder="123456789">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" id="telefono" placeholder="+57 321 000 0000">
+            </div>
+
+            <button type="submit" class="btn-submit" id="submit-btn">Crear Usuario Ahora</button>
+        </form>
+        <div id="msg" class="message"></div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="../panel/index.html" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">← Ir al
+                Login</a>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = ""; // Rutas relativas
+
+        document.getElementById('admin-user-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const msg = document.getElementById('msg');
+
+            btn.disabled = true;
+            btn.textContent = "⌛ Creando...";
+            msg.className = "message";
+            msg.style.display = "none";
+
+            const payload = {
+                nombre: document.getElementById('nombre').value,
+                apellido: document.getElementById('apellido').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                empresa: document.getElementById('empresa').value,
+                tipo_documento: document.getElementById('tipo_documento').value,
+                documento: document.getElementById('documento').value,
+                telefono: document.getElementById('telefono').value
+            };
+
+            try {
+                const res = await axios.post(`${API_BASE}/api/admin/create-user`, payload);
+                if (res.data.success) {
+                    msg.textContent = res.data.message;
+                    msg.className = "message success";
+                    document.getElementById('admin-user-form').reset();
+                }
+            } catch (err) {
+                msg.textContent = "❌ Error: " + (err.response?.data?.error || err.message);
+                msg.className = "message error";
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Crear Usuario Ahora";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+import api from '../../services/api.js';
+
+async function login() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    const res = await api.post('/api/login', { email, password });
+
+    localStorage.setItem('token', res.data.token);
+    alert('Login exitoso');
+
+    // luego redirigimos al dashboard real
+    // window.location.href = '/panel/dashboard.html';
+
+  } catch (e) {
+    alert('Credenciales incorrectas');
+  }
+}
+
+window.login = login;

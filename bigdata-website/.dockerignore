@@ -1,0 +1,11 @@
+node_modules
+.git
+.gitignore
+*.tar.gz
+README.md
+CAMBIOS.md
+RESUMEN-FINAL.md
+docker-compose.yml
+Dockerfile
+nginx.conf
+backend/Dockerfile

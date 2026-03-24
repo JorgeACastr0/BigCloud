@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Cloud | BigData</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BigData Cloud</h1>
+                <p class="user-email" id="user-email">Cargando...</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="instancias">
+                    <span>🖥️</span> Mis VPS
+                </a>
+                <a href="#" class="nav-item" data-view="crear">
+                    <span>➕</span> Crear VPS
+                </a>
+                <a href="#" class="nav-item" data-view="facturas">
+                    <span>💳</span> Facturación
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <span>🚪</span> Cerrar sesión
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Vista: Mis Instancias -->
+            <div id="view-instancias" class="view active">
+                <div class="view-header">
+                    <h2>Mis Instancias VPS</h2>
+                    <button class="btn-primary" onclick="showView('crear')">➕ Crear VPS</button>
+                </div>
+                <div id="instancias-list" class="instancias-grid">
+                    <div class="loading">Cargando instancias...</div>
+                </div>
+            </div>
+
+            <!-- Vista: Crear VPS -->
+            <div id="view-crear" class="view">
+                <div class="view-header">
+                    <h2>Crear Nueva Instancia</h2>
+                </div>
+                <div class="crear-form">
+                    <h3>Selecciona un plan</h3>
+                    <div id="planes-list" class="planes-grid">
+                        <div class="loading">Cargando planes...</div>
+                    </div>
+
+                    <div class="form-config" id="form-config" style="display:none;">
+                        <h3>Configuración</h3>
+                        <div class="form-group">
+                            <label>Hostname</label>
+                            <input type="text" id="input-hostname" placeholder="mi-servidor" required>
+                            <small>Solo letras, números y guiones. Ej: web-server, api-01</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Sistema Operativo</label>
+                            <div id="templates-list" class="templates-grid">
+                                <div class="loading">Cargando sistemas...</div>
+                            </div>
+                        </div>
+                        <div class="plan-selected" id="plan-selected"></div>
+                        <button class="btn-primary btn-large" onclick="crearInstancia()">
+                            🚀 Crear VPS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Facturación -->
+            <div id="view-facturas" class="view">
+                <div class="view-header">
+                    <h2>Facturación</h2>
+                </div>
+                <div class="facturas-content">
+                    <p>📊 Próximamente: historial de facturas y métodos de pago</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Consola VNC -->
+    <div id="modal-console" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Consola VPS</h3>
+                <button class="modal-close" onclick="closeConsole()">✕</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="console-iframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Info Live -->
+    <div id="modal-info" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detalles Técnicos VPS</h3>
+                <button class="modal-close" onclick="closeInfo()">✕</button>
+            </div>
+            <div class="modal-body" id="info-body">
+                <div class="loading">Cargando...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

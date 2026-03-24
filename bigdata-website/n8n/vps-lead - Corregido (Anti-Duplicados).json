@@ -1,0 +1,625 @@
+{
+  "name": "vps-lead - Corregido (Anti-Duplicados)",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const activationCode = Math.floor(100000 + Math.random() * 900000);\nreturn {\n  json: {\n    ...$json,\n    activation_code: activationCode\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -864,
+        704
+      ],
+      "id": "83d824ac-256f-435d-baab-90720420a0ec",
+      "name": "Generar Código"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Q3-jl4G2sMUzWXKuGMjKGpp8c9m-Yl5Iuq0Wh2Lk14A/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Q3-jl4G2sMUzWXKuGMjKGpp8c9m-Yl5Iuq0Wh2Lk14A/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "correo",
+              "lookupValue": "={{ $node[\"Webhook1\"].json.body.correo }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        704
+      ],
+      "id": "c01e86bb-9774-43ad-9a4b-e91b5a9ef12d",
+      "name": "Buscar si ya existe",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3lmiraCcD1Lp9MrY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.correo }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        704
+      ],
+      "id": "a04caa57-be35-42dd-be23-99cb78c784c4",
+      "name": "¿Existe?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "exists-id",
+              "name": "success",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "client-id",
+              "name": "client_exists",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        592
+      ],
+      "id": "0f312271-e9d3-40b5-9ea4-e86ed1ce9a0e",
+      "name": "Marcar Existe"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        592
+      ],
+      "id": "e32cf4b2-d008-4be7-96da-a434d407c5e9",
+      "name": "Responder: Ya Existe"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Q3-jl4G2sMUzWXKuGMjKGpp8c9m-Yl5Iuq0Wh2Lk14A/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre": "={{ $node[\"Webhook1\"].json.body.nombre }}",
+            "correo": "={{ $node[\"Webhook1\"].json.body.correo }}",
+            "telefono": "={{ $node[\"Webhook1\"].json.body.telefono }}",
+            "Plan vps": "={{ $node[\"Webhook1\"].json.body[\"Plan vps\"] }}",
+            "compania ": "={{ $node[\"Webhook1\"].json.body.compania }}",
+            "direccion": "={{ $node[\"Webhook1\"].json.body.direccion }}",
+            "ciudad": "={{ $node[\"Webhook1\"].json.body.ciudad }}",
+            "precio": "={{ $node[\"Webhook1\"].json.body.precio }}",
+            "plan name": "={{ $node[\"Webhook1\"].json.body[\"plan name\"] }}",
+            "timestamp": "={{ $node[\"Webhook1\"].json.body.timestamp }}",
+            "activation_code": "={{ $node[\"Generar Código\"].json.activation_code }}",
+            "is_verified": "FALSE",
+            "perfil": "={{ $('Webhook1').item.json.body.perfil }}",
+            "ip cliente": "={{ $('Webhook1').item.json.body['ip cliente'] }}",
+            "apellido": "={{ $('Webhook1').item.json.body.apellido }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "plan name",
+              "displayName": "plan name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "apellido",
+              "displayName": "apellido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Plan vps",
+              "displayName": "Plan vps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "precio",
+              "displayName": "precio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "compania ",
+              "displayName": "compania ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "direccion",
+              "displayName": "direccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ciudad",
+              "displayName": "ciudad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ip cliente",
+              "displayName": "ip cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "activation_code",
+              "displayName": "activation_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "is_verified",
+              "displayName": "is_verified",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "perfil",
+              "displayName": "perfil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -224,
+        832
+      ],
+      "id": "cbe8d3d7-3b09-48c1-a793-36438a53c885",
+      "name": "Nuevo: Guardar Fila",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3lmiraCcD1Lp9MrY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $node[\"Webhook1\"].json.body.correo }}",
+        "subject": "=Código de Activación BigData: {{ $node[\"Generar Código\"].json.activation_code }}",
+        "message": "=Bienvenido a Big Data, {{ $node[\"Webhook1\"].json.body.nombre }}, tu código es<h1> {{ $node[\"Generar Código\"].json.activation_code }}</h1>\n<br>\nhttps://n8n.bigdata.net.co/webhook/validate-code?correo={{ $node[\"Webhook1\"].json.body.correo }}&activation_code={{ $node[\"Generar Código\"].json.activation_code }} \n\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        832
+      ],
+      "id": "d2af46a6-a7ae-4eaf-9e83-394932273269",
+      "name": "Enviar Email",
+      "webhookId": "b28919df-592c-41ff-8739-4b185f27ea0c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "AY0Zh0pBY16mDDk3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "success-id",
+              "name": "success",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "client-false-id",
+              "name": "client_exists",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        832
+      ],
+      "id": "519a0af1-87f9-4ac1-9d7c-49bbe2566fc6",
+      "name": "Marcar Nuevo"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        400,
+        832
+      ],
+      "id": "221afbf3-b080-4ecd-be24-ecb7ef365c97",
+      "name": "Responder: Nuevo OK"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bigdata-lead-vps",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1088,
+        704
+      ],
+      "id": "6d0b7e50-7fcf-48e5-ac72-52b34b0d2e3b",
+      "name": "Webhook1",
+      "webhookId": "eaa9da90-56e6-4d65-b7d2-cc8068d59a1e"
+    },
+    {
+      "parameters": {
+        "from": "+17656336805",
+        "to": "={{ $('Webhook1').item.json.body.telefono }}",
+        "message": "= {{ $node[\"Webhook1\"].json.body.nombre }}.Tu Codigo de activacion para la cuenta {{ $node[\"Webhook1\"].json.body.correo }}\n es : {{ $('Generar Código').item.json.activation_code }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1056
+      ],
+      "id": "e3b2e3d5-5730-4f78-a101-19c6bdbbab4d",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "SDjadqShmdNQ0h3M",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+17656336805",
+        "to": "=+573002163460",
+        "message": "=www.yaruu.com.co fue aceptado por la CCB en los Premios, categoría microempresarios, destacando su lema: 'La calma también se diseña",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        1120
+      ],
+      "id": "8a8b6d53-9093-41c7-ab95-28c1a130d776",
+      "name": "Send an SMS/MMS/WhatsApp message1",
+      "credentials": {
+        "twilioApi": {
+          "id": "SDjadqShmdNQ0h3M",
+          "name": "Twilio account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook1": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.bigdata.net.co",
+            "user-agent": "axios/1.13.2",
+            "content-length": "376",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "201.184.49.203",
+            "x-forwarded-host": "n8n.bigdata.net.co",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "e1591c787250",
+            "x-real-ip": "201.184.49.203"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "timestamp": "2026-01-08T21:47:25.305Z",
+            "plan name": "Enterprise Java App",
+            "nombre": "Jorge",
+            "apellido": "Hernando castro",
+            "correo": "jorgecastro@sys.net.co",
+            "telefono": "+573002163460",
+            "perfil": "Desarrollador",
+            "Plan vps": "hosting-java",
+            "precio": "11.200",
+            "compania": "BigData",
+            "direccion": "Vol 81 94l43",
+            "ciudad": "Bogota (Bogota)",
+            "ip cliente": "192.168.22.207",
+            "activation_code": ""
+          },
+          "webhookUrl": "https://n8n.bigdata.net.co/webhook/bigdata-lead-vps",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Nuevo: Guardar Fila": [
+      {
+        "json": {
+          "nombre": "Jorge",
+          "correo": "jorgecastro@sys.net.co",
+          "telefono": "+573002163460",
+          "Plan vps": "hosting-java",
+          "compania ": "BigData",
+          "direccion": "Vol 81 94l43",
+          "ciudad": "Bogota (Bogota)",
+          "precio": "11.200",
+          "plan name": "Enterprise Java App",
+          "timestamp": "2026-01-08T21:47:25.305Z",
+          "activation_code": 605396,
+          "is_verified": "FALSE",
+          "perfil": "Desarrollador",
+          "ip cliente": "192.168.22.207",
+          "apellido": "Hernando castro"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Generar Código": {
+      "main": [
+        [
+          {
+            "node": "Buscar si ya existe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar si ya existe": {
+      "main": [
+        [
+          {
+            "node": "¿Existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Existe?": {
+      "main": [
+        [
+          {
+            "node": "Marcar Existe",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Nuevo: Guardar Fila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar Existe": {
+      "main": [
+        [
+          {
+            "node": "Responder: Ya Existe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuevo: Guardar Fila": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Email": {
+      "main": [
+        [
+          {
+            "node": "Marcar Nuevo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar Nuevo": {
+      "main": [
+        [
+          {
+            "node": "Responder: Nuevo OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Generar Código",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "78c408d2-bb14-4bdf-b437-2f879815495e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3115a3f2eb87184cb6cf829e5583edfcf51e18cc7d5a3038aafad7811f5e3c00"
+  },
+  "id": "BrV2d0FaTCIG3CYB",
+  "tags": []
+}
