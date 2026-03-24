@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables - NUNCA subir al repo
+.env
+**/.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+**/logs/
+
+# Debug scripts temporales
+bigdata-website/backend/debug-login.js
+bigdata-website/backend/fix-admin.js
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Docker volumes data
+postgres/data/

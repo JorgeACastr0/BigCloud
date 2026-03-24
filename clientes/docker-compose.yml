@@ -1,0 +1,40 @@
+services:
+  foss-app:
+    image: fossbilling/fossbilling:latest
+    container_name: foss-clientes
+    environment:
+      - FOSSBILLING_DB_TYPE=mysql
+      - FOSSBILLING_DB_HOST=foss-db-clientes  # <--- CAMBIADO de 'foss-db'
+      - FOSSBILLING_DB_NAME=fossbilling
+      - FOSSBILLING_DB_USER=bigdata
+      - FOSSBILLING_DB_PASS=Nick906090
+    volumes:
+      - ./data:/var/www/html/data
+    networks:
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.foss-clientes.rule=Host(`clientes.bigdata.net.co`)"
+      - "traefik.http.routers.foss-clientes.entrypoints=websecure"
+      - "traefik.http.routers.foss-clientes.tls.certresolver=letsencrypt"
+      - "traefik.http.services.foss-clientes.loadbalancer.server.port=80"
+    restart: unless-stopped
+  
+  foss-db:
+    image: mariadb:10.6
+    container_name: foss-db-clientes  # <--- ESTE es el nombre correcto
+    environment:
+      - MYSQL_DATABASE=fossbilling
+      - MYSQL_USER=bigdata
+      - MYSQL_PASSWORD=Nick906090
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - ./mysql-data:/var/lib/mysql  # <--- VOLUMEN para persistencia
+    networks:
+      - default
+    restart: unless-stopped
+
+networks:
+  default:
+    name: n8n-automation_default
+    external: true

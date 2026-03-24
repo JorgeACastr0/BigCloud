@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  dns-server:
+    container_name: dns-server
+    image: technitium/dns-server:latest
+    restart: always
+    environment:
+      - DNS_SERVER_DOMAIN=dns.bigdata.net.co
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./config:/etc/dns-server # Ahora usa una carpeta local llamada 'config' en ~/dns/
+    networks:
+      - n8n-automation_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dns-ui.rule=Host(`dns.bigdata.net.co`)"
+      - "traefik.http.routers.dns-ui.entrypoints=websecure"
+      - "traefik.http.routers.dns-ui.tls.certresolver=letsencrypt"
+      - "traefik.http.services.dns-ui.loadbalancer.server.port=5380"
+networks:
+  n8n-automation_default:
+    external: true

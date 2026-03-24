@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres-shared
+    image: postgres:15-alpine
+    restart: always
+    networks:
+      - n8n-automation_default
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=BigData_Postgres_2025_Secure!
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.postgres.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.postgres.entrypoints=postgres"
+      - "traefik.tcp.services.postgres.loadbalancer.server.port=5432"
+      # Adminer web via Traefik (HTTPS) - ¡ESTO FALTA!
+      - "traefik.http.routers.postgres-admin.rule=Host(`sql.bigdata.net.co`)"
+      - "traefik.http.routers.postgres-admin.entrypoints=websecure"
+      - "traefik.http.routers.postgres-admin.tls=true"
+      - "traefik.http.routers.postgres-admin.tls.certresolver=letsencrypt"
+      - "traefik.http.services.postgres-admin.loadbalancer.server.port=8080"
+
+
+
+volumes:
+  postgres_data:
+
+networks:
+  n8n-automation_default:
+    external: true

@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  netdata:
+    image: netdata/netdata:latest
+    container_name: netdata
+    restart: always
+    hostname: miami-vps-monitor
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/lib/netdata/cache
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - n8n-automation_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netdata.rule=Host(`monitor.bigdata.net.co`)"
+      - "traefik.http.routers.netdata.entrypoints=websecure"
+      - "traefik.http.routers.netdata.tls.certresolver=letsencrypt"
+      - "traefik.http.services.netdata.loadbalancer.server.port=19999"
+      - "traefik.http.middlewares.netdata-auth.basicauth.users=admin:$$apr1$$y97Y0./O$$/InR6B2Zf6M.M7.H0O5P1/"
+volumes:
+  netdataconfig:
+  netdatalib:
+  netdatacache:
+networks:
+  n8n-automation_default:
+    external: true

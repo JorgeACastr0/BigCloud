@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>BigData VPS - VPS en Colombia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .btn-bigdata { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+    </style>
+    
+    <link rel='stylesheet' type='text/css' href="{{ 'assets/css/font-awesome.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'build/css/huraga-bundle.c8d5ac.css' | asset_url }}">
+    <link rel="shortcut icon" href="https://bigdata.net.co/assets/images/favicon.ico">
+</head>
+
+<body>
+    <div class="gradient-bg text-white">
+        <div class="container">
+            <nav class="navbar navbar-expand-md py-4">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ '/'|link }}">
+                        <img src="https://bigdata.net.co/assets/images/logo.png" alt="Big Data SAS" height="45">
+                        <span class="d-sm-none">BigData VPS</span>
+                    </a>
+                    
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="{{ '/'|link }}">Inicio</a>
+                        <a class="nav-link" href="{{ 'order'|link }}">Planes VPS</a>
+                        <a class="nav-link" href="{{ 'support'|link }}">Soporte</a>
+                        {% if guest %}
+                            <a class="nav-link" href="{{ 'login'|link }}">Acceder</a>
+                            <a class="btn btn-bigdata ms-2" href="{{ 'signup'|link }}">Registrarse</a>
+                        {% else %}
+                            <a class="nav-link" href="{{ 'client'|link }}">Mi Cuenta</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="text-center py-12">
+                <h1 class="text-4xl font-bold mb-4">VPS en Colombia</h1>
+                <p class="text-xl mb-6">Latencia Real < 20ms • IPs Públicas Incluidas</p>
+                <a href="{{ 'order'|link }}" class="btn btn-bigdata btn-lg">Ver Planes VPS</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-8">
+        {{ content|raw }}
+    </div>
+
+    <footer class="text-center py-4 text-muted">
+        <div>© {{ 'now'|date('Y') }} BIG DATA SAS - VPS Colombia con IPs Públicas</div>
+        <div>Latencia < 20ms • Soporte 24/7</div>
+    </footer>
+
+    <script type="text/javascript" src="{{ 'library/Api/API.js' | asset_url }}"></script>
+    <script src="{{ 'build/js/huraga-bundle.a8d174.js' | asset_url }}">
+</body>
+</html>

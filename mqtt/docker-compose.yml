@@ -1,0 +1,33 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0.18
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+    command: mosquitto -c /mosquitto/config/mosquitto.conf
+
+  mqtt-tester:
+    image: eclipse-mosquitto:2.0.18
+    container_name: mqtt-tester
+    restart: "no"
+    stdin_open: true
+    tty: true
+    command: >
+      sh -c "echo '=== Cliente MQTT para pruebas ===';
+             echo '';
+             echo 'Suscribirse a todo:';
+             echo '  mosquitto_sub -h mosquitto -t \"#\" -v';
+             echo '';
+             echo 'Suscribirse solo a Shelly:';
+             echo '  mosquitto_sub -h mosquitto -t \"shellies/#\" -v';
+             echo '';
+             echo 'Publicar mensaje:';
+             echo '  mosquitto_pub -h mosquitto -t \"test\" -m \"hola\"';
+             echo '';
+             /bin/sh"
