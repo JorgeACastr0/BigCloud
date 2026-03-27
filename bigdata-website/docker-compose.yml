@@ -12,16 +12,22 @@ services:
       - JWT_EXPIRES=${JWT_EXPIRES}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - NODE_ENV=production
+      - POSTGRES_HOST=postgres-shared
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=bigdata_isp_v2
     networks:
       - bigdata-network
       - n8n-automation_default
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=n8n-automation_default"
-      - "traefik.http.routers.bigdata-api.rule=Host(`ww2.bigdata.net.co`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.bigdata-api.entrypoints=websecure"
-      - "traefik.http.routers.bigdata-api.tls.certresolver=letsencrypt"
-      - "traefik.http.services.bigdata-api.loadbalancer.server.port=3006"
+    ports:
+      - "3006:3006"   # para la API
+#    labels:{}
+#   - "traefik.enable=true"
+#   - "traefik.docker.network=n8n-automation_default"
+#   - "traefik.http.routers.bigdata-api.rule=Host(`ww2.bigdata.net.co`) && PathPrefix(`/api`)"
+#   - "traefik.http.routers.bigdata-api.entrypoints=websecure"
+#  - "traefik.http.routers.bigdata-api.tls.certresolver=letsencrypt"
+#   - "traefik.http.services.bigdata-api.loadbalancer.server.port=3006"
 
   web:
     build: .
@@ -34,13 +40,15 @@ services:
     networks:
       - bigdata-network
       - n8n-automation_default
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=n8n-automation_default"
-      - "traefik.http.routers.bigdata-web.rule=Host(`ww2.bigdata.net.co`)"
-      - "traefik.http.routers.bigdata-web.entrypoints=websecure"
-      - "traefik.http.routers.bigdata-web.tls.certresolver=letsencrypt"
-      - "traefik.http.services.bigdata-web.loadbalancer.server.port=80"
+    ports:
+      - "8080:80"     # o el puerto que se desee
+#   labels:{}
+#    - "traefik.enable=true"
+#     - "traefik.docker.network=n8n-automation_default"
+#     - "traefik.http.routers.bigdata-web.rule=Host(`ww2.bigdata.net.co`)"
+#     - "traefik.http.routers.bigdata-web.entrypoints=websecure"
+#    - "traefik.http.routers.bigdata-web.tls.certresolver=letsencrypt"
+#     - "traefik.http.services.bigdata-web.loadbalancer.server.port=80"
 
 networks:
   bigdata-network:

@@ -1,0 +1,36 @@
+name: BigCloud Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: Qwen 2.5 Coder 14B (GPU)
+    provider: ollama
+    model: qwen2.5-coder:14b
+    apiBase: http://10.15.15.10:11434
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: DeepSeek Coder 16B
+    provider: ollama
+    model: deepseek-coder-v2:16b
+    apiBase: http://10.15.15.10:11434
+    roles:
+      - chat
+
+embeddingsProvider:
+  provider: ollama
+  model: nomic-embed-text:latest
+  apiBase: http://10.15.15.10:11434
+
+tabAutocompleteModel:
+  name: Qwen 2.5 Coder 14B
+  provider: ollama
+  model: qwen2.5-coder:7b
+  apiBase: http://10.15.15.10:11434
+
+experimental:
+  agentMode:
+    enabled: true
+  disableIndexing: false	
